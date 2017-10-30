@@ -1,0 +1,24 @@
+.item-bar{
+    height: 50px;
+    color: white;
+    background: rgb(221, 6, 6);
+}
+.item-bar .item-bar-price{
+    float: left;
+    font-size: 30px;
+    padding-top: 10px;
+}
+.item-bar-price-icon{
+    float: left;
+    font-size: 15px;
+    padding-top: 24px;
+    margin: 5px;
+}
+.item-bar-old-price{
+    float: left;
+    color: rgba(222, 200, 200, 0.9);
+    font-size: 13px;
+    padding-top: 24px;
+    margin: 5px;
+    text-decoration:line-through;
+}

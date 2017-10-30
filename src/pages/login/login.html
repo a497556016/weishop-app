@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            登录
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form #loginForm="ngForm">
+    <div class="login-panel" align="center">
+        <div class="login-item">
+            <div class="label">用户名：</div>
+            <input id="username" name="username" [(ngModel)]="username" required />
+        </div>
+        <div class="login-item">
+            <div class="label">密&nbsp;&nbsp;&nbsp;码：</div>
+            <input id="password" name="password" [(ngModel)]="password" type="password" required />
+        </div>
+        <div class="login-item">
+            <button ion-button full middle (click)="login()" [disabled]="!loginForm.valid">登录</button>
+            <button ion-button full middle (click)="register()">注册</button>
+        </div>
+    </div>
+    </form>
+</ion-content>

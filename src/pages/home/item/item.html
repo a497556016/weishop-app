@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>商品详情</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+
+        <ion-card-header style="text-align:center;">
+            <h1>{{product.name}}</h1>
+        </ion-card-header>
+
+        <ion-card-content>
+            <img src="{{product.picUrl}}">
+            <div class="item-bar">
+                <ion-icon name="logo-yen" class="item-bar-price-icon"></ion-icon>
+                <div class="item-bar-price">
+                    {{product.price*product.discount}}
+                </div>
+                <div class="item-bar-old-price">{{product.price}}</div>
+            </div>
+            <div style="margin:5px 5px;">{{product.description}}</div>
+        </ion-card-content>
+
+    </ion-card>
+
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-label>颜色：</ion-label>
+                <ion-select okText="确定" cancelText="取消" [(ngModel)]="selectItem.model" interface="popover" (ionChange)="selectModel()" >
+                    <ion-option *ngFor="let m of model" value="{{m}}">{{m}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>尺码：</ion-label>
+                <ion-select okText="确定" cancelText="取消"  [(ngModel)]="selectItem.size" interface="popover" (ionChange)="selectSize()">
+                    <ion-option *ngFor="let s of size" value="{{s}}">{{s}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>数量：</ion-label>
+                <ion-input type="number" [(ngModel)]="selectItem.count"></ion-input>
+            </ion-item>
+            <ion-item>
+                <button ion-button full large color="danger" (click)="putInCart()">加入购物车</button>
+            </ion-item>
+        </ion-list>
+        
+    </ion-card>
+
+</ion-content>

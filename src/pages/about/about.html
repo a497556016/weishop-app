@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      运动
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div id="container" style="height:60%;width:100%;"></div>
+  <div>
+    <button ion-button full (click)="beginSport()">{{btnText}}</button>
+  </div>
+  <div class="location">
+    {{curLocation}}
+  </div>
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>创建消息</ion-title>
+        <ion-buttons end>
+            <button ion-button small (click)="close()">关闭</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form #createMsgForm=ngForm >
+        <ion-list>
+            <ion-item>
+                <ion-label stacked>标题：</ion-label>
+                <ion-input [(ngModel)]="message.title" name="title" type="text" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>内容：</ion-label>
+                <ion-textarea [(ngModel)]="message.content" name="content" required></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>上传照片：</ion-label>
+            </ion-item>
+            <ion-grid>
+                <ion-row style="height:{{col.width}}px;" padding>
+                    <ion-col #col col-4 (click)="selectPic()">
+                        <img src="./assets/icon/add.png" style="width:100%;height:100%;"/>
+                    </ion-col>
+                    <ion-col col-4 *ngIf="message.picUrl" >
+                        <img src="{{message.picUrl}}" style="width:70px;height:100%;">
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+        <div>
+            <button ion-button full small (click)="createMessage()" [disabled]="!createMsgForm.valid">提交</button>
+        </div>
+    </form>
+</ion-content>
