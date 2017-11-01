@@ -94,7 +94,7 @@ export class ProductItemPage{
             userId : this.userService.curUser.id
         }).then(data => {
             if(data.code==1){
-                this.cartService.cartItems.push(data.data);
+                this.cartService.addCartitem(data.data);
                 this.msg.show('商品已经加入购物车！');
                 this.viewCtrl.dismiss();
             }else{

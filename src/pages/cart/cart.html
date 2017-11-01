@@ -4,7 +4,7 @@
             购物车
         </ion-title>
         <ion-buttons end>
-            <button ion-button icon-only (click)="openModal()">
+            <button ion-button icon-only (click)="balance()">
                 <ion-icon name="options"></ion-icon>
                 结算
             </button>
@@ -15,18 +15,36 @@
 <ion-content padding>
     <ion-list>
         <ion-item *ngFor="let item of cartService.cartItems">
-
+            <ion-checkbox item-start [(ngModel)]="item.checked" (ionChange)="selectCartItem()"></ion-checkbox>
             <ion-thumbnail item-left>
                 <img src="{{item.picUrl}}">
             </ion-thumbnail>
-            <h2>{{item.name}}</h2>
-            <h5 style="font-size:10px;">{{item.description}}</h5>
-            <div>
-                <span style="color:red;">
-                    <ion-icon name="logo-yen"></ion-icon>{{item.price*item.discount}}
-                </span> / {{item.unit}}
-                <span style="float:right;">x{{item.count}}</span>
+            <div item-content style="width:100%">
+                <h3>{{item.name}}</h3>
+                <p style="font-size:10px;">{{item.description}}</p>
+                <div style="font-size:12px;line-height:12px;">
+                    <span style="color:red;float:left;">
+                        <ion-icon name="logo-yen"></ion-icon>{{item.price}}
+                    </span> / {{item.unit}}
+                    <span>{{item.model}}&nbsp;{{item.size}}</span>
+                    <span style="float:right;">x{{item.count}}</span>
+                </div>
             </div>
         </ion-item>
+        <ion-item>
+            <div>
+                <span>总价：{{totalPrice}}</span>
+            </div>
+            <div>
+                <span>折扣优惠：{{discountPrice}}</span>
+            </div>
+            <div>
+                <span>实际应付：{{needPayPrice}}</span>
+            </div>
+        </ion-item>
+        <ion-item>
+            <button ion-button full large color="danger" style="float:right;">结算</button>
+        </ion-item>
     </ion-list>
+
 </ion-content>
