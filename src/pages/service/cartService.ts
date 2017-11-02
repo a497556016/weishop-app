@@ -1,43 +1,29 @@
 import { Injectable } from "@angular/core";
+import { ShopCart } from "../model/shopCart";
+import { HttpService } from "./httpService";
+import { MsgService } from "./msgService";
 
 @Injectable()
 export class CartService {
-    _cartItems: object[] = [];
+    _cartItems: ShopCart[] = [];
     constructor(
-
+        private http:HttpService,
+        private msg:MsgService
     ) {
 
     }
-    set cartItems(cartItems: object[]) {
-        let reCartItems = new Array();
-        for (let i in cartItems) {
-            let ci = cartItems[i];
-            let curCi = null;
-            for (let j in reCartItems) {
-                if (reCartItems[j].proItemId == ci.proItemId) {
-                    curCi = reCartItems[j];
-                    break;
-                }
-            }
-            if (curCi != null) {
-                curCi.count += ci.count;
-            } else {
-                curCi = ci;
-                reCartItems.push(curCi);
-            }
-
-        }
-        this._cartItems = reCartItems;
+    set cartItems(cartItems: ShopCart[]) {
+        this._cartItems = cartItems;
     }
     get cartItems() {
         return this._cartItems;
     }
 
-    addCartitem(cartItem: object) {
+    addCartitem(cartItem: ShopCart) {
         let curItem = null;
         for (let i in this._cartItems) {
             let ci = this._cartItems[i];
-            if (ci.proItemId == cartItem.proItemId) {
+            if (ci.id == cartItem.id) {
                 curItem = ci;
             }
         }
@@ -46,5 +32,25 @@ export class CartService {
         } else {
             this._cartItems.push(cartItem);
         }
+    }
+
+    deleteById(id:number){
+        this.http.post('shopCart/deleteById',{
+            id : id
+        }).then(result => {
+            if(result.code==1){
+                let newItems = new Array();
+                for (let i in this._cartItems) {
+                    let ci = this._cartItems[i];
+                    if (ci.id != id) {
+                        newItems.push(ci);
+                    }
+                }
+                this._cartItems = newItems;
+            }else{
+                this.msg.show('删除失败！');
+            }
+        });
+        
     }
 }

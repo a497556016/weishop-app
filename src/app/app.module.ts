@@ -28,6 +28,8 @@ import { Camera } from '@ionic-native/camera';
 import { ProductItemPage } from '../pages/home/item/item';
 import { CartPage } from '../pages/cart/cart';
 import { CartService } from '../pages/service/cartService';
+import { CreateOrderPage } from '../pages/order/createOrder';
+import { ShipAddressPage } from '../pages/shipAddress/shipAddress';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { CartService } from '../pages/service/cartService';
     RegisterPage,
     CreateMessagePage,
     ProductItemPage,
-    CartPage
+    CartPage,
+    CreateOrderPage,
+    ShipAddressPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,9 @@ import { CartService } from '../pages/service/cartService';
     RegisterPage,
     CreateMessagePage,
     ProductItemPage,
-    CartPage
+    CartPage,
+    CreateOrderPage,
+    ShipAddressPage
   ],
   providers: [
     StatusBar,

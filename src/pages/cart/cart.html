@@ -4,9 +4,9 @@
             购物车
         </ion-title>
         <ion-buttons end>
-            <button ion-button icon-only (click)="balance()">
-                <ion-icon name="options"></ion-icon>
-                结算
+            <button ion-button icon-only (click)="beginEditItem()">
+                <ion-icon name="create"></ion-icon>
+                {{isEditItem?'完成':'编辑'}}
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -15,11 +15,11 @@
 <ion-content padding>
     <ion-list>
         <ion-item *ngFor="let item of cartService.cartItems">
-            <ion-checkbox item-start [(ngModel)]="item.checked" (ionChange)="selectCartItem()"></ion-checkbox>
+            <ion-checkbox item-start [(ngModel)]="item.checked" (ionChange)="selectCartItem()" *ngIf="!isEditItem"></ion-checkbox>
             <ion-thumbnail item-left>
                 <img src="{{item.picUrl}}">
             </ion-thumbnail>
-            <div item-content style="width:100%">
+            <div item-content style="width:100%" *ngIf="!isEditItem">
                 <h3>{{item.name}}</h3>
                 <p style="font-size:10px;">{{item.description}}</p>
                 <div style="font-size:12px;line-height:12px;">
@@ -30,6 +30,25 @@
                     <span style="float:right;">x{{item.count}}</span>
                 </div>
             </div>
+            <div item-content style="width:100%" *ngIf="isEditItem">
+                <div style="width:100%;height:36px;">
+                    <div style="float:left;width:50%;font-size:10px;padding-top:10px;"><ion-icon name="logo-yen"></ion-icon>{{item.price}} / {{item.unit}}</div>
+                    <div style="float:right;">
+                        <button style="float:left;" ion-button small (click)="editItemCount(item,1)">+</button>
+                        <div style="float:left;padding-top:5px;">
+                            <input type="number" [(ngModel)]="item.count" (ngModelChange)="inputItemCount(item)" style="text-align:center;width:30px;"/>
+                        </div>
+                        <button ion-button small (click)="editItemCount(item,-1)">-</button>
+                    </div>
+                </div>
+                <div style="width:100%;height:36px;">
+                    <div style="float:left;width:50%;font-size:10px;">{{item.model}}&nbsp;{{item.size}}</div>
+                    <div style="float:right;">
+                        <button ion-button small color="danger" style="width:91px;" (click)="deleteCartItem(item)">删除</button>
+                    </div>
+                </div>
+            </div>
+            
         </ion-item>
         <ion-item>
             <div>
@@ -43,7 +62,7 @@
             </div>
         </ion-item>
         <ion-item>
-            <button ion-button full large color="danger" style="float:right;">结算</button>
+            <button ion-button full large color="danger" style="float:right;" (click)="balance()">结算</button>
         </ion-item>
     </ion-list>
 

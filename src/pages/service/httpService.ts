@@ -32,6 +32,15 @@ export class HttpService {
             .catch(this.handleError);
     }
 
+    postJson(url: string, data: string): Promise<any> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(CommonProperty.SERVER_BASE_URL + url, data, options)
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         console.log(body);

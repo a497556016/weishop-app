@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            创建订单
+        </ion-title>
+
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngIf="shipAddress==null">
+            <h2>请选择收货地址</h2>
+            <button ion-button clear item-end (click)="selectShipAddress()">选择</button>
+        </ion-item>
+        <ion-item *ngIf="shipAddress!=null" (click)="selectShipAddress()">
+            <div>
+                <h3 style="float:left">收货人：{{shipAddress.contactUserName}}</h3>
+                <h3 style="float:right">{{shipAddress.contactNumber}}</h3>
+            </div>
+            <p>{{shipAddress.address}}</p>
+        </ion-item>
+        <ion-item *ngFor="let item of cartItems">
+            <ion-thumbnail item-left>
+                <img src="{{item.picUrl}}">
+            </ion-thumbnail>
+        </ion-item>
+        <ion-item *ngIf="cartItems==null||cartItems.length==0">没有选中的商品</ion-item>
+    </ion-list>
+
+</ion-content>

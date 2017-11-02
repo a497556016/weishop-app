@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            收货地址
+        </ion-title>
+
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let shipAddress of shipAddressList" (click)="selectShippAddress(shipAddress)">
+            <div item-left>
+                <h2>{{shipAddress.contactUserName}}</h2>
+                <h3>{{shipAddress.contactNumber}}</h3>
+                <p><span style="color:red;">{{shipAddress.isDefault?'[默认地址]':''}}</span>{{shipAddress.address}}</p>
+            </div>
+            
+        </ion-item>
+    </ion-list>
+</ion-content>
