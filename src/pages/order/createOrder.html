@@ -6,22 +6,64 @@
 
     </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
     <ion-list>
-        <ion-item *ngIf="shipAddress==null">
-            <h2>请选择收货地址</h2>
-            <button ion-button clear item-end (click)="selectShipAddress()">选择</button>
+        <ion-item-group>
+            <ion-item-divider color="light">收货地址</ion-item-divider>
+            <ion-item (click)="selectShipAddress()" *ngIf="shipAddress==null">
+                <h3 item-left>点击请选择收货地址</h3>
+                <ion-icon name="arrow-forward" item-end></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="shipAddress!=null" (click)="selectShipAddress()">
+                <div item-left>
+                    <h3 style="margin-top:5px;">收货人：{{shipAddress.contactUserName}} {{shipAddress.contactNumber}}</h3>
+                    <p>{{shipAddress.address}}</p>
+                </div>
+                <ion-icon name="arrow-forward" item-end></ion-icon>
+            </ion-item>
+        </ion-item-group>
+        <ion-item-group>
+            <ion-item-divider color="light">商品列表</ion-item-divider>
+            <ion-item *ngFor="let item of cartItems">
+                <ion-thumbnail item-left>
+                    <img src="{{item.picUrl}}">
+                </ion-thumbnail>
+                <div item-content style="width:100%">
+                    <h3>{{item.name}}</h3>
+                    <p style="font-size:10px;">{{item.description}}</p>
+                    <div style="font-size:12px;line-height:12px;">
+                        <span style="color:red;float:left;">
+                            <ion-icon name="logo-yen"></ion-icon>{{item.price}}
+                        </span> / {{item.unit}}
+                        <span>{{item.model}}&nbsp;{{item.size}}</span>
+                        <span style="float:right;">x{{item.count}}</span>
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item *ngIf="cartItems==null||cartItems.length==0">没有选中的商品</ion-item>
+        </ion-item-group>
+        <ion-item>
+            <div>
+                <span>总价：{{totalPrice}}</span>
+            </div>
+            <div>
+                <span>折扣优惠：{{discountPrice}}</span>
+            </div>
+
         </ion-item>
-        <ion-item *ngIf="shipAddress!=null" (click)="selectShipAddress()">
-            <h3>收货人：{{shipAddress.contactUserName}} {{shipAddress.contactNumber}}</h3>
-            <p>{{shipAddress.address}}</p>
-        </ion-item>
-        <ion-item *ngFor="let item of cartItems">
-            <ion-thumbnail item-left>
-                <img src="{{item.picUrl}}">
-            </ion-thumbnail>
-        </ion-item>
-        <ion-item *ngIf="cartItems==null||cartItems.length==0">没有选中的商品</ion-item>
     </ion-list>
 
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar style="line-height: 50px;">
+
+        <div style="float:left;font-size:18px;">
+            <span>订单价格：{{needPayPrice}}</span>
+        </div>
+        <div style="float:right;width:100px;">
+            <button ion-button full color="danger" (click)="submitOrder()" [disabled]="shipAddress==null">提交订单</button>
+        </div>
+    </ion-toolbar>
+
+</ion-footer>

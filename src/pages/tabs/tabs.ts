@@ -1,16 +1,11 @@
 import { LoginPage } from './../login/login';
 import { NavController, Tabs } from 'ionic-angular';
-import { UserService } from './../service/userService';
 import { Component, ViewChild } from '@angular/core';
 
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { CartPage } from '../cart/cart';
-import { HttpService } from '../service/httpService';
-import { StorageService } from '../service/storageService';
 import { CommonProperty } from '../../common/consts/commonProperty';
-import { CartService } from '../service/cartService';
-import { MsgService } from '../service/msgService';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -22,12 +17,7 @@ export class TabsPage {
   tab3Root = ContactPage;
 
   constructor(
-    private userService:UserService,
-    private navCtrl:NavController,
-    private http:HttpService,
-    private storage:StorageService,
-    private cartService:CartService,
-    private msgService:MsgService
+    
   ) {
     
   }
