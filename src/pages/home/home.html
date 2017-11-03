@@ -10,9 +10,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides autoplay="5000" loop style="height:160px;">
-    <ion-slide *ngFor="let imgSrc of slidePics" >
-      <img src="{{imgSrc}}" style="height:160px;width:100%;" />
+  <ion-slides autoplay="5000" loop style="height:160px;" *ngIf="adProducts.length>0">
+    <ion-slide *ngFor="let adp of adProducts" (click)="showDetail(adp)" >
+      <img src="{{adp.picUrl}}" style="height:160px;width:100%;" />
     </ion-slide>
   </ion-slides>
   <ion-list>

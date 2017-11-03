@@ -8,7 +8,8 @@ export class Product{
         public createTime:any,
         public createBy:string,
         public modifyTime:any,
-        public modifyBy:string
+        public modifyBy:string,
+        public picUrl:string
     ){
 
     }
