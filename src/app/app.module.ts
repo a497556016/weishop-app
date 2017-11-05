@@ -1,3 +1,4 @@
+import { EditShipAddressPage } from './../pages/shipAddress/editShipAddress';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -44,7 +45,8 @@ import { ShipAddressPage } from '../pages/shipAddress/shipAddress';
     ProductItemPage,
     CartPage,
     CreateOrderPage,
-    ShipAddressPage
+    ShipAddressPage,
+    EditShipAddressPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { ShipAddressPage } from '../pages/shipAddress/shipAddress';
     ProductItemPage,
     CartPage,
     CreateOrderPage,
-    ShipAddressPage
+    ShipAddressPage,
+    EditShipAddressPage
   ],
   providers: [
     StatusBar,

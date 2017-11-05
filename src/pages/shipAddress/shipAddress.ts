@@ -1,3 +1,4 @@
+import { EditShipAddressPage } from './editShipAddress';
 import { Component } from "@angular/core";
 import { ShipAddress } from "../model/shipAddress";
 import { HttpService } from "../service/httpService";
@@ -40,5 +41,11 @@ export class ShipAddressPage{
 
         console.log(createOrderPage);
         this.navCtrl.pop();
+    }
+
+    editShipAddress(){
+        this.navCtrl.push(EditShipAddressPage,{
+            
+        });
     }
 }

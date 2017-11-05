@@ -1,3 +1,5 @@
+import { MsgService } from './../service/msgService';
+import { HttpService } from './../service/httpService';
 import { Component } from "@angular/core";
 import { ShopCart } from "../model/shopCart";
 import { NavParams, NavController } from "ionic-angular";
@@ -15,10 +17,25 @@ export class CreateOrderPage {
     needPayPrice: number = 0.00;
     constructor(
         private navParam: NavParams,
-        public navCtrl: NavController
+        public navCtrl: NavController,
+        private http:HttpService,
+        private msg:MsgService
     ) {
         this.cartItems = this.navParam.get('cartItems');
         this.computePrice();
+        this.loadDefaultShipAddress();
+    }
+
+    loadDefaultShipAddress(){
+        this.http.get('shipAddress/selectOne',{
+            isDefault : 1
+        }).then(result => {
+            if(result.code == 1){
+                this.shipAddress = result.data;
+            }else{
+                this.msg.alert(result.msg);
+            }
+        });
     }
 
     selectShipAddress() {
