@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            订单列表
+        </ion-title>
+
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card *ngFor="let data of orderDatas">
+        <ion-item>
+            <h3 item-start style="margin-top:15px;">订单编号：{{data.order.id}}</h3>
+            <h3 item-end>创建日期：{{data.order.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</h3>
+        </ion-item>
+        
+    </ion-card>
+
+
+</ion-content>

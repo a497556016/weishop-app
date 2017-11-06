@@ -23,20 +23,20 @@ export class CartPage {
         private loadingCtrl: LoadingController,
         public navCtrl: NavController
     ) {
+        
+    }
+
+    ionViewWillEnter(){
         //开始初始化用户的购物车
         this.loadUserShopCart();
     }
 
     loadUserShopCart() {
-        let loading = this.loadingCtrl.create({
-            content: '请稍候...'
-        });
-        loading.present();
+        
         let user = this.userService.curUser;
         this.http.get("shopCart/queryUserShopCart", {
             userId: user.id
         }).then(result => {
-            loading.dismiss();
             if (result.code == 1) {
                 this.cartService.cartItems = result.data;
                 this.computePrice(true);

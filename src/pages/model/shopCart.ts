@@ -12,6 +12,7 @@ export class ShopCart{
     discount:number;
     count:number;
     picUrl:string;
+    description:string;
     constructor(){
 
     }

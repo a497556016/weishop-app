@@ -62,7 +62,7 @@
             </div>
         </ion-item>
         <ion-item>
-            <button ion-button full large color="danger" style="float:right;" (click)="balance()">结算</button>
+            <button ion-button full large color="danger" style="float:right;" (click)="balance()" [disabled]="cartService.cartItems.length==0">结算</button>
         </ion-item>
     </ion-list>
 

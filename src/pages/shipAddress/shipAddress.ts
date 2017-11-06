@@ -18,8 +18,12 @@ export class ShipAddressPage{
         private msg: MsgService,
         private navCtrl: NavController
     ){
-        this.loadShipAddress();
         
+        
+    }
+
+    ionViewWillEnter(){
+        this.loadShipAddress();
     }
 
     loadShipAddress(){

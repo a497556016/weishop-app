@@ -2,9 +2,12 @@ import { MsgService } from './../service/msgService';
 import { HttpService } from './../service/httpService';
 import { Component } from "@angular/core";
 import { ShopCart } from "../model/shopCart";
-import { NavParams, NavController } from "ionic-angular";
+import { NavParams, NavController, LoadingController } from "ionic-angular";
 import { ShipAddressPage } from "../shipAddress/shipAddress";
 import { ShipAddress } from "../model/shipAddress";
+import { Order } from '../model/order';
+import { OrderList } from '../model/orderList';
+import { UserService } from '../service/userService';
 
 @Component({
     templateUrl: 'createOrder.html'
@@ -19,7 +22,9 @@ export class CreateOrderPage {
         private navParam: NavParams,
         public navCtrl: NavController,
         private http:HttpService,
-        private msg:MsgService
+        private msg:MsgService,
+        private userService:UserService,
+        private loadCtrl:LoadingController
     ) {
         this.cartItems = this.navParam.get('cartItems');
         this.computePrice();
@@ -59,6 +64,47 @@ export class CreateOrderPage {
     }
 
     submitOrder() {
-        console.log('提交订单', this.cartItems)
+        console.log('提交订单', this.cartItems);
+        let order = new Order();
+        order.userId = this.userService.curUser.id;
+        order.userName = this.userService.curUser.userName;
+        order.shipId = this.shipAddress.id;
+        order.shipAddress = this.shipAddress.address;
+        order.contactUserName = this.shipAddress.contactUserName;
+        order.contactNumber = this.shipAddress.contactNumber;
+        order.totalPrice = this.totalPrice;
+        order.countPrice = this.needPayPrice;
+        order.createBy = this.userService.curUser.userName;
+
+        let orderList = new Array<OrderList>();
+        let delShopCartIds = new Array<number>();
+        for(let i in this.cartItems){
+            let ci = this.cartItems[i];
+            let ol = OrderList.createByShopCart(ci);
+            orderList.push(ol);
+
+            delShopCartIds.push(ci.id);
+        }
+
+        let orderDto = {
+            order : order,
+            orderList : orderList,
+            delShopCartIds : delShopCartIds
+        };
+
+        console.log('提交订单', order);
+        let loading = this.loadCtrl.create({
+            content : '正在提交订单...'
+        });
+        loading.present();
+        this.http.postJson('order/createOrder',JSON.stringify(orderDto)).then(result => {
+            loading.dismiss();
+            if(result.code == 1){
+                this.msg.show('订单创建成功，请及时支付！');
+                this.navCtrl.pop();
+            }else{
+                this.msg.alert(result.msg);
+            }
+        });
     }
 }

@@ -1,3 +1,26 @@
 page-contact {
 
 }
+
+.user-head{
+    text-align: center;
+    background: rgb(255, 60, 60);
+    padding-left: 0px;
+}
+
+.user-head-photo{
+    text-align: center;
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.user-head-photo img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+}
+
+.user-head-photo h2{
+    margin-top: 5px;
+}

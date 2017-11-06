@@ -13,7 +13,7 @@ import { UserService } from './../pages/service/userService';
 import { Logger } from './../pages/log/logger';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { LoginPage } from '../pages/login/login';
@@ -31,6 +31,7 @@ import { CartPage } from '../pages/cart/cart';
 import { CartService } from '../pages/service/cartService';
 import { CreateOrderPage } from '../pages/order/createOrder';
 import { ShipAddressPage } from '../pages/shipAddress/shipAddress';
+import { ListOrderPage } from '../pages/order/listOrder';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ShipAddressPage } from '../pages/shipAddress/shipAddress';
     CartPage,
     CreateOrderPage,
     ShipAddressPage,
-    EditShipAddressPage
+    EditShipAddressPage,
+    ListOrderPage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,8 @@ import { ShipAddressPage } from '../pages/shipAddress/shipAddress';
     CartPage,
     CreateOrderPage,
     ShipAddressPage,
-    EditShipAddressPage
+    EditShipAddressPage,
+    ListOrderPage
   ],
   providers: [
     StatusBar,

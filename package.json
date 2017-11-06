@@ -34,6 +34,7 @@
     "cordova-plugin-file": "^4.3.3",
     "cordova-plugin-file-transfer": "^1.6.3",
     "cordova-plugin-telerik-imagepicker": "^2.1.8",
+    "intl": "^1.2.5",
     "ionic-angular": "3.7.1",
     "ionicons": "3.0.0",
     "rxjs": "5.4.3",
