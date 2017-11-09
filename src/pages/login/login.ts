@@ -8,7 +8,6 @@ import { User } from './../model/user';
 import { Component } from '@angular/core';
 import { HttpService } from '../service/httpService';
 import { MsgService } from '../service/msgService';
-import { CommonProperty } from '../../common/consts/commonProperty';
 
 @Component({
     selector : 'loginPage',

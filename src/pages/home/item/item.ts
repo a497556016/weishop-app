@@ -4,7 +4,6 @@ import { ModelChoosePage } from "./modelChoose";
 import { HttpService } from "../../service/httpService";
 import { MsgService } from "../../service/msgService";
 import { StorageService } from "../../service/storageService";
-import { CommonProperty } from "../../../common/consts/commonProperty";
 import { UserService } from "../../service/userService";
 import { CartService } from "../../service/cartService";
 

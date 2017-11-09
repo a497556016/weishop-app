@@ -1,3 +1,5 @@
+import { Tab } from 'ionic-angular';
+import { SELECT_TAB } from './../../common/consts/commonProperty';
 import { LoginPage } from './../login/login';
 import { NavController, Tabs } from 'ionic-angular';
 import { Component, ViewChild } from '@angular/core';
@@ -5,7 +7,6 @@ import { Component, ViewChild } from '@angular/core';
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { CartPage } from '../cart/cart';
-import { CommonProperty } from '../../common/consts/commonProperty';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -25,12 +26,13 @@ export class TabsPage {
 
 
   changeTabs(){
+    let selectTab:Tab;
     for(var i in this.tabs._tabs){
       if(this.tabs._tabs[i].isSelected){
-        CommonProperty.SELECT_TAB = this.tabs._tabs[i];
+        selectTab = this.tabs._tabs[i];
       }
     }
-    if(CommonProperty.SELECT_TAB&&CommonProperty.SELECT_TAB.tabTitle=='购物车'){
+    if(selectTab&&selectTab.tabTitle=='购物车'){
       
     }
   }

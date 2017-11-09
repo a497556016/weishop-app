@@ -1,3 +1,4 @@
+import { SERVER_BASE_URL } from './../../common/consts/commonProperty';
 import { Logger } from './../log/logger';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -5,7 +6,6 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { CommonProperty } from '../../common/consts/commonProperty';
 
 @Injectable()
 export class HttpService {
@@ -16,8 +16,8 @@ export class HttpService {
     ) { }
 
     get(url: string, data?: any): Promise<any> {
-        console.log(CommonProperty.SERVER_BASE_URL)
-        return this.http.get(CommonProperty.SERVER_BASE_URL + url + this.toQueryString(data))
+        console.log(SERVER_BASE_URL)
+        return this.http.get(SERVER_BASE_URL + url + this.toQueryString(data))
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
@@ -26,7 +26,7 @@ export class HttpService {
     post(url: string, data: any): Promise<any> {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(CommonProperty.SERVER_BASE_URL + url, this.toBodyString(data), options)
+        return this.http.post(SERVER_BASE_URL + url, this.toBodyString(data), options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
@@ -35,7 +35,7 @@ export class HttpService {
     postJson(url: string, data: string): Promise<any> {
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(CommonProperty.SERVER_BASE_URL + url, data, options)
+        return this.http.post(SERVER_BASE_URL + url, data, options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);

@@ -4,7 +4,6 @@ import { Message } from './../../model/message';
 import { FileService } from './../../service/fileService';
 import { ModalController, ViewController, NavController, NavParams } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { CommonProperty } from '../../../common/consts/commonProperty';
 @Component({
     templateUrl : 'createMessage.html'
 })
