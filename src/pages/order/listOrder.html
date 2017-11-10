@@ -8,11 +8,40 @@
 </ion-header>
 <ion-content>
     <ion-card *ngFor="let data of orderDatas">
-        <ion-item>
-            <h3 item-start style="margin-top:15px;">订单编号：{{data.order.id}}</h3>
-            <h3 item-end>创建日期：{{data.order.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</h3>
+        <ion-item-divider>
+            
+            <h3 item-start style="margin-top:10px;float:left;">订单编号：{{data.order.id}}</h3>
+            <h3 item-end style="float:left;">创建日期：{{data.order.createTime | date:'yyyy-MM-dd HH:mm'}}</h3>
+        </ion-item-divider>
+        <ion-item *ngFor="let item of data.orderList">
+            <ion-thumbnail item-left>
+                <img src="{{item.proPicUrl}}">
+            </ion-thumbnail>
+            <div item-content style="width:100%">
+                <h3>{{item.name}}</h3>
+                <p>{{item.description}}</p>
+                <div style="font-size:12px;line-height:12px;">
+                    <span style="color:red;float:left;">
+                        <ion-icon name="logo-yen"></ion-icon>{{item.price}}
+                    </span> / {{item.unit}}
+                    <span>{{item.model}}&nbsp;{{item.size}}</span>
+                    <span style="float:right;">x{{item.count}}</span>
+                </div>
+            </div>
         </ion-item>
-        
+        <div class="item-info">
+            <span style="font-size:14px;line-height:20px;font-weight:bold;">订单价格：{{data.order.countPrice}}</span>
+            <ion-badge color="{{payStatusData[data.order.payStatus][1]}}">{{payStatusData[data.order.payStatus][0]}}</ion-badge>
+            <ion-badge color="{{deliveryStatusData[data.order.deliveryStatus][1]}}">{{deliveryStatusData[data.order.deliveryStatus][0]}}</ion-badge>
+        </div>
+        <ion-item>
+            <div style="text-align:right;">
+
+                <button ion-button color="primary">支付订单</button>
+                <button ion-button color="light">评价</button>
+                <button ion-button color="danger" (click)="deleteOrder(data.order)">删除</button>
+            </div>
+        </ion-item>
     </ion-card>
 
 

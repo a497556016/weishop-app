@@ -1,3 +1,4 @@
+import { ShipAddressPage } from './../shipAddress/shipAddress';
 import { MyApp } from './../../app/app.component';
 import { LoginPage } from './../login/login';
 import { UserService } from './../service/userService';
@@ -19,15 +20,16 @@ export class ContactPage {
     // private myApp:MyApp,
     private msg: MsgService
   ) {
-    this.loginUser = userService.curUser;
+    this.loginUser = this.userService.curUser;
   }
 
   logout() {
+    let me = this;
     this.msg.confirm('是否退出当前账号？', function (yes) {
       if (yes) {
-        this.userService.removeLoginUser();
+        me.userService.removeLoginUser();
         // this.myApp.rootPage = LoginPage;
-        this.navCtrl.parent.parent.setRoot(LoginPage);
+        me.navCtrl.parent.parent.setRoot(LoginPage);
       }
     });
 
@@ -37,5 +39,9 @@ export class ContactPage {
     this.navCtrl.push(ListOrderPage,{
       
     });
+  }
+
+  toShipAddressList(){
+    this.navCtrl.push(ShipAddressPage,{});
   }
 }

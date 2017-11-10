@@ -1,4 +1,5 @@
-import { SERVER_BASE_URL } from './../../common/consts/commonProperty';
+import { LoadingController, Loading } from 'ionic-angular';
+import { CommonProperty } from './../../common/consts/commonProperty';
 import { Logger } from './../log/logger';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -12,33 +13,90 @@ export class HttpService {
 
     constructor(
         private http: Http,
-        private logger: Logger
+        private logger: Logger,
+        private loadCtrl: LoadingController
     ) { }
 
-    get(url: string, data?: any): Promise<any> {
-        console.log(SERVER_BASE_URL)
-        return this.http.get(SERVER_BASE_URL + url + this.toQueryString(data))
+    get(url: string, data?: any, opts?: any): Promise<any> {
+        let loading:Loading,me = this;
+        if(opts&&opts.loadMask){
+            loading = this.loadCtrl.create({
+                content : opts.loadMsg||''
+            });
+        }
+        if(loading){
+            loading.present();
+        }
+        return this.http.get(CommonProperty.SERVER_BASE_URL + url + this.toQueryString(data))
             .toPromise()
-            .then(this.extractData)
-            .catch(this.handleError);
+            .then(res => {
+                if(loading){
+                    loading.dismiss();
+                }
+                return me.extractData(res);
+            })
+            .catch(error => {
+                if(loading){
+                    loading.dismiss();
+                }
+                return me.handleError(error)
+            });
     }
 
-    post(url: string, data: any): Promise<any> {
+    post(url: string, data: any, opts?: any): Promise<any> {
+        let loading:Loading,me = this;
+        if(opts&&opts.loadMask){
+            loading = this.loadCtrl.create({
+                content : opts.loadMsg||''
+            });
+        }
+        if(loading){
+            loading.present();
+        }
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(SERVER_BASE_URL + url, this.toBodyString(data), options)
+        return this.http.post(CommonProperty.SERVER_BASE_URL + url, this.toBodyString(data), options)
             .toPromise()
-            .then(this.extractData)
-            .catch(this.handleError);
+            .then(res => {
+                if(loading){
+                    loading.dismiss();
+                }
+                return me.extractData(res);
+            })
+            .catch(error => {
+                if(loading){
+                    loading.dismiss();
+                }
+                return me.handleError(error)
+            });
     }
 
-    postJson(url: string, data: string): Promise<any> {
+    postJson(url: string, data: string, opts?: any): Promise<any> {
+        let loading:Loading,me = this;
+        if(opts&&opts.loadMask){
+            loading = this.loadCtrl.create({
+                content : opts.loadMsg||''
+            });
+        }
+        if(loading){
+            loading.present();
+        }
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(SERVER_BASE_URL + url, data, options)
+        return this.http.post(CommonProperty.SERVER_BASE_URL + url, data, options)
             .toPromise()
-            .then(this.extractData)
-            .catch(this.handleError);
+            .then(res => {
+                if(loading){
+                    loading.dismiss();
+                }
+                return me.extractData(res);
+            })
+            .catch(error => {
+                if(loading){
+                    loading.dismiss();
+                }
+                return me.handleError(error)
+            });
     }
 
     private extractData(res: Response) {

@@ -1,0 +1,13 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            选择地区
+        </ion-title>
+
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+        <button ion-item *ngFor="let d of data" (click)="selectNext(d.code)" >{{d.name}}</button>
+    </ion-list>
+</ion-content>

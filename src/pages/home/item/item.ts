@@ -1,3 +1,4 @@
+import { Product } from './../../model/product';
 import { Component } from "@angular/core";
 import { NavParams, ModalController, PopoverController, NavController, ViewController } from "ionic-angular";
 import { ModelChoosePage } from "./modelChoose";
@@ -12,7 +13,10 @@ import { CartService } from "../../service/cartService";
     templateUrl : 'item.html'
 })
 export class ProductItemPage{
-    product:any;
+    product:Product;
+    productItem:any = {
+        storeTotal : 0
+    };
     model:string[];
     size:string[];
     selectItem:any = {
@@ -32,6 +36,19 @@ export class ProductItemPage{
     ){
         this.product = navParams.get('product');
         this.loadModelAndSize();
+        this.loadProductDetail();
+    }
+
+    loadProductDetail(){
+        this.http.get('productItem/selectOne',{
+            pCode : this.product.code
+        }).then(result => {
+            if(result.code == 1){
+                this.productItem = result.data;
+            }else{
+                this.msg.show(result.msg);
+            }
+        });
     }
 
     loadModelAndSize(){

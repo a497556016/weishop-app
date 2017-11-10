@@ -20,8 +20,7 @@ export class RegisterPage{
     onSubmit(){
         console.log(this.user);
         this.logger.info('注册成功！');
-        this.navCtrl.push(LoginPage,{
-            user : this.user
-        });
+        
+        this.navCtrl.push(LoginPage,{});
     }
 }

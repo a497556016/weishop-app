@@ -11,8 +11,8 @@
 
 <ion-content>
   <ion-slides autoplay="5000" loop style="height:160px;" *ngIf="adProducts.length>0">
-    <ion-slide *ngFor="let adp of adProducts" (click)="showDetail(adp)" >
-      <img src="{{adp.picUrl}}" style="height:160px;width:100%;" />
+    <ion-slide *ngFor="let adp of adProducts" >
+      <img src="{{adp.picUrl}}" style="height:160px;width:100%;" (click)="showDetail(adp)" />
     </ion-slide>
   </ion-slides>
   <ion-list>

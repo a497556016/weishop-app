@@ -12,7 +12,12 @@
         </ion-card-header>
 
         <ion-card-content>
-            <img src="{{product.picUrl}}">
+            <ion-slides autoplay="5000" loop  *ngIf="product.images.length>0">
+                <ion-slide *ngFor="let img of product.images">
+                    <img src="{{img.filePath}}" />
+                </ion-slide>
+            </ion-slides>
+
             <div class="item-bar">
                 <ion-icon name="logo-yen" class="item-bar-price-icon"></ion-icon>
                 <div class="item-bar-price">
@@ -20,7 +25,8 @@
                 </div>
                 <div class="item-bar-old-price">{{product.price}}</div>
             </div>
-            <div style="margin:5px 5px;">{{product.description}}</div>
+            <div class="line-text">{{product.description}}</div>
+            <div class="line-text"><label>库存数量</label>{{productItem.storeTotal}}</div>
         </ion-card-content>
 
     </ion-card>
@@ -29,13 +35,13 @@
         <ion-list>
             <ion-item>
                 <ion-label>颜色：</ion-label>
-                <ion-select okText="确定" cancelText="取消" [(ngModel)]="selectItem.model" interface="popover" (ionChange)="selectModel()" >
+                <ion-select okText="确定" cancelText="取消" [(ngModel)]="selectItem.model" interface="popover" (ionChange)="selectModel()">
                     <ion-option *ngFor="let m of model" value="{{m}}">{{m}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>尺码：</ion-label>
-                <ion-select okText="确定" cancelText="取消"  [(ngModel)]="selectItem.size" interface="popover" (ionChange)="selectSize()">
+                <ion-select okText="确定" cancelText="取消" [(ngModel)]="selectItem.size" interface="popover" (ionChange)="selectSize()">
                     <ion-option *ngFor="let s of size" value="{{s}}">{{s}}</ion-option>
                 </ion-select>
             </ion-item>
@@ -47,7 +53,7 @@
                 <button ion-button full large color="danger" (click)="putInCart()">加入购物车</button>
             </ion-item>
         </ion-list>
-        
+
     </ion-card>
 
 </ion-content>

@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-list>
+    <ion-list inset>
         <ion-item *ngFor="let item of cartService.cartItems">
             <ion-checkbox item-start [(ngModel)]="item.checked" (ionChange)="selectCartItem()" *ngIf="!isEditItem"></ion-checkbox>
             <ion-thumbnail item-left>

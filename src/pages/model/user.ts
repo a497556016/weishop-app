@@ -3,6 +3,7 @@ export class User{
     public userAccount?:string;
     public userName?:string;
     public sex?:string;
+    public password?:string;
     constructor(
        
     ){}

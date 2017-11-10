@@ -10,6 +10,8 @@ export class Order{
     contactUserName:string;
     totalPrice:number;
     countPrice:number;
+    payStatus:string;
+    deliveryStatus:string;
     createBy:string;
     createTime:Date = new Date();
     modifyBy:string;

@@ -1,3 +1,4 @@
+import { CommonProperty } from './../../common/consts/commonProperty';
 import { MyApp } from './../../app/app.component';
 import { RegisterPage } from './../register/register';
 import { TabsPage } from './../tabs/tabs';
@@ -16,25 +17,26 @@ import { MsgService } from '../service/msgService';
 export class LoginPage{
     username:string;
     password:string;
+    ip:string;
+    port:string = '8686';
     constructor(
         private userService:UserService,
         private logger:Logger,
         private viewCtrl:ViewController,
         private appCtrl:App,
-        public navCtrl:NavController,
-        private navParams:NavParams,
+        private navCtrl:NavController,
         private myApp:MyApp,
         private httpService:HttpService,
         private msgService:MsgService
     ){
-        let user = navParams.get('user');
-        if(user){
-            this.username = user.name;
-            this.password = user.pwd;
-        }
+        
     }
 
     login(){
+        if(this.ip&&this.port){
+            CommonProperty.SERVER_BASE_URL = 'http://' + this.ip + ':' + this.port + '/';
+        }
+        
         console.log(this.username,this.password)
         this.httpService.get("user/loginOrRegister",{
             userAccount : this.username,
@@ -49,8 +51,9 @@ export class LoginPage{
                 this.userService.saveUser(user);
                 this.logger.info('登录系统成功');
                 //this.viewCtrl.dismiss();
-                this.navCtrl.push(TabsPage);
-                this.navCtrl.remove(0,1);
+                // this.navCtrl.push(TabsPage);
+                // this.navCtrl.remove(0,1);
+                this.navCtrl.setRoot(TabsPage)
                 //this.appCtrl.getRootNav().push(TabsPage);
             }else{
                 this.msgService.alert(data.msg);
@@ -60,6 +63,6 @@ export class LoginPage{
     }
 
     register(){
-        this.navCtrl.push(RegisterPage);
+        this.navCtrl.push(RegisterPage,{});
     }
 }

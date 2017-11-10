@@ -1,5 +1,4 @@
 import { Tab } from 'ionic-angular';
-import { SELECT_TAB } from './../../common/consts/commonProperty';
 import { LoginPage } from './../login/login';
 import { NavController, Tabs } from 'ionic-angular';
 import { Component, ViewChild } from '@angular/core';

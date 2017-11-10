@@ -13,7 +13,8 @@ export class OrderList{
 	description:string;
 	count:number;
 	price:number;
-	discount:number;
+    discount:number;
+    proPicUrl:string;
     constructor(){
 
     }

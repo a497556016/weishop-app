@@ -9,7 +9,8 @@ export class Product{
         public createBy:string,
         public modifyTime:any,
         public modifyBy:string,
-        public picUrl:string
+        public picUrl:string,
+        public images:Array<Product>
     ){
 
     }

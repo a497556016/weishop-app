@@ -1,3 +1,4 @@
+import { AddressPage } from './../pages/shipAddress/addresPages/address';
 import { EditShipAddressPage } from './../pages/shipAddress/editShipAddress';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
@@ -48,7 +49,8 @@ import { ListOrderPage } from '../pages/order/listOrder';
     CreateOrderPage,
     ShipAddressPage,
     EditShipAddressPage,
-    ListOrderPage
+    ListOrderPage,
+    AddressPage
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { ListOrderPage } from '../pages/order/listOrder';
     CreateOrderPage,
     ShipAddressPage,
     EditShipAddressPage,
-    ListOrderPage
+    ListOrderPage,
+    AddressPage
   ],
   providers: [
     StatusBar,

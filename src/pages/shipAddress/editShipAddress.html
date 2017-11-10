@@ -10,32 +10,10 @@
     <form #shipForm="ngForm">
         <ion-list>
             <ion-item>
-                <ion-label stacked>选择省份：</ion-label>
-                <ion-select okText="确定" cancelText="取消" interface="popover" (ionChange)="initCitySelect()" [(ngModel)]="shipAddress.province"
-                    name="province" required>
-                    <ion-option *ngFor="let p of provinceData" value="{{p.code}}">{{p.name}}</ion-option>
-                </ion-select>
+                <ion-label stacked>选择地区：</ion-label>
+                <ion-input (click)="selectArea()" [readonly]="true" name="area" [(ngModel)]="shipAddress.province + ' ' + shipAddress.city + ' ' + shipAddress.street + ' ' + shipAddress.community "></ion-input>
             </ion-item>
-            <ion-item>
-                <ion-label stacked>选择城市：</ion-label>
-                <ion-select okText="确定" cancelText="取消" interface="popover" (ionChange)="initStreetSelect()" [(ngModel)]="shipAddress.city"
-                    name="city" required>
-                    <ion-option *ngFor="let p of cityData" value="{{p.code}}">{{p.name}}</ion-option>
-                </ion-select>
-            </ion-item>
-            <ion-item>
-                <ion-label stacked>选择街道：</ion-label>
-                <ion-select okText="确定" cancelText="取消" interface="popover" (ionChange)="initCommunitySelect()" [(ngModel)]="shipAddress.street"
-                    name="street" required>
-                    <ion-option *ngFor="let p of streetData" value="{{p.code}}">{{p.name}}</ion-option>
-                </ion-select>
-            </ion-item>
-            <ion-item>
-                <ion-label stacked>选择社区：</ion-label>
-                <ion-select okText="确定" cancelText="取消" interface="popover" [(ngModel)]="shipAddress.community" name="community" required>
-                    <ion-option *ngFor="let p of communityData" value="{{p.code}}">{{p.name}}</ion-option>
-                </ion-select>
-            </ion-item>
+            
             <ion-item>
                 <ion-label stacked>补充地址：</ion-label>
                 <ion-input [(ngModel)]="shipAddress.buildingFloor" name="buildingFloor" required></ion-input>
@@ -47,8 +25,8 @@
             <ion-item>
                 <ion-label stacked>性别：</ion-label>
                 <ion-select okText="确定" cancelText="取消" interface="action-sheet" [(ngModel)]="shipAddress.sex" name="sex" required>
-                    <ion-option value="1">男</ion-option>
-                    <ion-option value="0">女</ion-option>
+                    <ion-option value="男">男</ion-option>
+                    <ion-option value="女">女</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
@@ -56,8 +34,8 @@
                 <ion-input type="tel" [(ngModel)]="shipAddress.contactNumber" name="contactNumber"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label>默认地址：</ion-label>
-                <ion-checkbox checked="false" [(ngModel)]="shipAddress.default" name="default"></ion-checkbox>
+                <ion-label item-left>默认地址：</ion-label>
+                <ion-checkbox item-end checked="false" [(ngModel)]="shipAddress.default" name="default"></ion-checkbox>
             </ion-item>
 
 
