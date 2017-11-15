@@ -86,4 +86,26 @@ export class ShipAddressPage {
         });
        
     }
+
+    setDefaultShipAddress(shipAddress){
+        let me = this;
+        this.msg.confirm('是否设置该收获地址为默认地址？',yes => {
+            if(yes){
+                me.http.post('shipAddress/setDefaultShipAddress',{
+                    id : shipAddress.id,
+                    userId : me.userService.curUser.id
+                },{
+                    loadMask : true,
+                    loadMsg : '正在设置...'
+                }).then(result => {
+                    if(result.code == 1){
+                        me.msg.show('设置成功！');
+                        me.loadShipAddress();
+                    }else{
+                        me.msg.show(result.msg);
+                    }
+                });
+            }
+        });
+    }
 }

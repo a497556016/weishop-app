@@ -25,6 +25,12 @@ export class UserService{
         this._curUser = value;
     }
     get curUser(){
-        return this._curUser||this.storageService.get(LOGIN_USER)||null;
+        if(!this._curUser){
+            let obj = this.storageService.get(LOGIN_USER);
+            if(obj){
+                this._curUser = new User(obj);
+            }
+        }
+        return this._curUser;
     }
 }

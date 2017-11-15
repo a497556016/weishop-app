@@ -1,3 +1,6 @@
+import { CommentPage } from './../pages/comment/comment';
+import { DatePipe } from '@angular/common';
+import { EditUserPage } from './../pages/user/editUser';
 import { AddressPage } from './../pages/shipAddress/addresPages/address';
 import { EditShipAddressPage } from './../pages/shipAddress/editShipAddress';
 import { File } from '@ionic-native/file';
@@ -50,7 +53,9 @@ import { ListOrderPage } from '../pages/order/listOrder';
     ShipAddressPage,
     EditShipAddressPage,
     ListOrderPage,
-    AddressPage
+    AddressPage,
+    EditUserPage,
+    CommentPage
   ],
   imports: [
     BrowserModule,
@@ -81,7 +86,9 @@ import { ListOrderPage } from '../pages/order/listOrder';
     ShipAddressPage,
     EditShipAddressPage,
     ListOrderPage,
-    AddressPage
+    AddressPage,
+    EditUserPage,
+    CommentPage
   ],
   providers: [
     StatusBar,
@@ -98,7 +105,8 @@ import { ListOrderPage } from '../pages/order/listOrder';
     MsgService,
     CartService,
     {provide:Logger,useExisting:BetterLogger},
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DatePipe
   ]
 })
 export class AppModule {}

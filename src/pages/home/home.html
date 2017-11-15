@@ -10,14 +10,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides autoplay="5000" loop style="height:160px;" *ngIf="adProducts.length>0">
-    <ion-slide *ngFor="let adp of adProducts" >
-      <img src="{{adp.picUrl}}" style="height:160px;width:100%;" (click)="showDetail(adp)" />
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-slides #ionSlides autoplay="3000" loop="true" (ionSlideAutoplayStop)="autoPlay()" style="height:200px;" *ngIf="adProducts.length>0"
+    (ionSlideTap)="ionSlideTap()">
+    <ion-slide *ngFor="let adp of adProducts;let i = index" id="{{i}}">
+      <img src="{{adp.picUrl}}" style="height:200px;width:100%;" />
     </ion-slide>
   </ion-slides>
   <ion-list>
     <ion-list-header style="height:30px;">商品列表</ion-list-header>
-    <ion-item *ngFor="let pro of products" (click)="showDetail(pro)" >
+    <ion-item *ngFor="let pro of products" (click)="showDetail(pro)">
       <ion-thumbnail item-left>
         <img src="{{pro.picUrl}}">
       </ion-thumbnail>
@@ -25,4 +30,8 @@
       <p>{{pro.description}}</p>
     </ion-item>
   </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

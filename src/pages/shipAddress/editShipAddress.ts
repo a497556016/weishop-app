@@ -39,10 +39,6 @@ export class EditShipAddressPage {
     }
 
     selectArea(){
-        this.shipAddress.province = '';
-        this.shipAddress.city = '';
-        this.shipAddress.street = '';
-        this.shipAddress.community = '';
         this.navCtrl.push(AddressPage,{
             query : this.shipAddress.country,
             level : 0,

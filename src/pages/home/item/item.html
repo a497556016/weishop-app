@@ -12,7 +12,7 @@
         </ion-card-header>
 
         <ion-card-content>
-            <ion-slides autoplay="5000" loop  *ngIf="product.images.length>0">
+            <ion-slides autoplay="3000" loop  *ngIf="product.images.length>0">
                 <ion-slide *ngFor="let img of product.images">
                     <img src="{{img.filePath}}" />
                 </ion-slide>
@@ -26,7 +26,7 @@
                 <div class="item-bar-old-price">{{product.price}}</div>
             </div>
             <div class="line-text">{{product.description}}</div>
-            <div class="line-text"><label>库存数量</label>{{productItem.storeTotal}}</div>
+            <div class="line-text"><label>库存剩余</label>{{productItem.storeTotal-productItem.orderCount}}</div>
         </ion-card-content>
 
     </ion-card>

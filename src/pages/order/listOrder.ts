@@ -1,3 +1,5 @@
+import { CommentPage } from './../comment/comment';
+import { NavController } from 'ionic-angular';
 import { Component } from "@angular/core";
 import { UserService } from "../service/userService";
 import { HttpService } from "../service/httpService";
@@ -23,7 +25,8 @@ export class ListOrderPage{
     constructor(
         private userService:UserService,
         private http:HttpService,
-        private msg : MsgService
+        private msg : MsgService,
+        private navCtrl : NavController
     ){
 
     }
@@ -64,6 +67,13 @@ export class ListOrderPage{
                     }
                 });
             }
+        });
+    }
+
+    evaluate(orderList){
+        
+        this.navCtrl.push(CommentPage,{
+            orderList : orderList
         });
     }
 }

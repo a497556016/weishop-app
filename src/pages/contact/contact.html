@@ -11,9 +11,9 @@
   <ion-list>
     <ion-item class="user-head">
       <div class="user-head-photo">
-        <img src="">
+        <img src="{{loginUser.photoUrl}}" (tap)="editUserInfo()">
       </div>
-      <h2>{{loginUser.userName}}</h2>
+      <h2 style="padding:5px 0;">{{loginUser.userName}}</h2>
 
     </ion-item>
     <button ion-item (click)="toOrderList()">

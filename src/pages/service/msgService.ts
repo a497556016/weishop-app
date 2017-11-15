@@ -14,7 +14,19 @@ export class MsgService {
         this.toastCtrl.create({
             message: msg,
             duration: 3000,
-            position: 'top'
+            position: 'top',
+            dismissOnPageChange : true
+        }).present();
+    }
+    error(msg){
+        this.toastCtrl.create({
+            message: msg,
+            duration: 3000,
+            position: 'middle',
+            cssClass : 'danger',
+            dismissOnPageChange : true,
+            showCloseButton : true,
+            closeButtonText : '关闭'
         }).present();
     }
     alert(msg:string,call?:any){

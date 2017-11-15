@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            个人信息
+        </ion-title>
+
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form #editUserForm="ngForm">
+        <ion-list>
+            <ion-item>
+                <ion-label>用户名</ion-label>
+                <ion-input [(ngModel)]="userInfo.userName" name="userName" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>账号</ion-label>
+                <ion-input [(ngModel)]="userInfo.userAccount" name="userAccount" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>身份证</ion-label>
+                <ion-input [(ngModel)]="userInfo.cardId" name="cardId"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>生日</ion-label>
+                <ion-datetime doneText="确定" cancelText="取消" [(ngModel)]="userInfo.birthday" name="birthday" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"
+                    placeholder="请选择生日日期"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>性别</ion-label>
+                <ion-select okText="确定" cancelText="取消" [(ngModel)]="userInfo.sex" name="sex" placeholder="请选择性别">
+                    <ion-option value="男">男</ion-option>
+                    <ion-option value="女">女</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>邮箱</ion-label>
+                <ion-input type="email" [(ngModel)]="userInfo.email" name="email" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>手机</ion-label>
+                <ion-input type="tel" [(ngModel)]="userInfo.phone" name="phone" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <button ion-button full large color="primary" [disabled]="!editUserForm.valid" (click)="submitUserInfo()">提交</button>
+                <button ion-button full large color="light" type="reset">重置</button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

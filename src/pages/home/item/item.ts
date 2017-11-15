@@ -15,7 +15,8 @@ import { CartService } from "../../service/cartService";
 export class ProductItemPage{
     product:Product;
     productItem:any = {
-        storeTotal : 0
+        storeTotal : 0,
+        orderCount : 0
     };
     model:string[];
     size:string[];
@@ -25,12 +26,12 @@ export class ProductItemPage{
     };
     constructor(
         private navParams:NavParams,
-        public navCtrl:NavController,
-        private popoverCtrl: PopoverController,
-        private viewCtrl:ViewController,
+        // public navCtrl:NavController,
+        // private popoverCtrl: PopoverController,
+        // private viewCtrl:ViewController,
         private http:HttpService,
         private msg:MsgService,
-        private storage:StorageService,
+        // private storage:StorageService,
         private userService:UserService,
         private cartService:CartService
     ){
@@ -40,11 +41,25 @@ export class ProductItemPage{
     }
 
     loadProductDetail(){
-        this.http.get('productItem/selectOne',{
-            pCode : this.product.code
-        }).then(result => {
+        let param:any = {};
+        if(this.selectItem.model){
+            param.model = this.selectItem.model
+        }
+        if(this.selectItem.size){
+            param.size = this.selectItem.size
+        }
+        param.pCode = this.product.code;
+        this.http.get('productItem/selectList',param).then(result => {
             if(result.code == 1){
-                this.productItem = result.data;
+                this.productItem.storeTotal = 0;
+                this.productItem.orderCount = 0;
+
+                for(let i in result.data){
+                    let o = result.data[i];
+                    this.productItem.storeTotal += o.storeTotal;
+                    this.productItem.orderCount += (o.orderCount||0);
+                }
+                
             }else{
                 this.msg.show(result.msg);
             }
@@ -65,6 +80,7 @@ export class ProductItemPage{
     }
 
     selectModel(){
+        this.loadProductDetail();
         this.http.get('productItem/getSizeByModel',{
             code : this.product.code,
             model : this.selectItem.model
@@ -76,6 +92,7 @@ export class ProductItemPage{
     }
 
     selectSize(){
+        this.loadProductDetail();
         this.http.get('productItem/getModelBySize',{
             code : this.product.code,
             size : this.selectItem.size
@@ -112,7 +129,7 @@ export class ProductItemPage{
             if(data.code==1){
                 this.cartService.addCartitem(data.data);
                 this.msg.show('商品已经加入购物车！');
-                this.viewCtrl.dismiss();
+                // this.viewCtrl.dismiss();
             }else{
                 this.msg.alert(data.msg);
             }

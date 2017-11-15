@@ -43,11 +43,7 @@ export class LoginPage{
             password : this.password
         }).then(data => {
             if(data.code==1){
-                let user = new User();
-                user.userAccount = data.data.userAccount;
-                user.id = data.data.id;
-                user.userName = data.data.userName;
-
+                let user = new User(data.data);
                 this.userService.saveUser(user);
                 this.logger.info('登录系统成功');
                 //this.viewCtrl.dismiss();

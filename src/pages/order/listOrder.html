@@ -37,8 +37,8 @@
         <ion-item>
             <div style="text-align:right;">
 
-                <button ion-button color="primary">支付订单</button>
-                <button ion-button color="light">评价</button>
+                <button ion-button color="primary" [disabled]="data.order.payStatus=='1'">支付订单</button>
+                <button ion-button color="light" (click)="evaluate(data.orderList)">评价</button>
                 <button ion-button color="danger" (click)="deleteOrder(data.order)">删除</button>
             </div>
         </ion-item>

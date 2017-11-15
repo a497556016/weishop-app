@@ -52,13 +52,16 @@ export class AddressPage {
             var d = subDistricts[i];
             data.push(new Combo(d.name, d.name));
         }
-        console.log(data)
+        // console.log(data)
         return data;
     }
 
     selectNext(code) {
         if (this.level == 0) {
             this.editPage.shipAddress.province = code;
+            this.editPage.shipAddress.city = '';
+            this.editPage.shipAddress.street = '';
+            this.editPage.shipAddress.community = '';
         } else if (this.level == 1) {
             this.editPage.shipAddress.city = code;
         } else if (this.level == 2) {
@@ -68,7 +71,7 @@ export class AddressPage {
         }
         if (this.level == 3) {
             let len = this.navCtrl.length();
-            this.navCtrl.remove(len-4,4);
+            this.navCtrl.remove(len-this.level-1,this.level+1);
         } else {
             this.navCtrl.push(AddressPage, {
                 query: code,

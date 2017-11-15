@@ -1,3 +1,5 @@
+import { EditUserPage } from './../user/editUser';
+import { HttpService } from './../service/httpService';
 import { ShipAddressPage } from './../shipAddress/shipAddress';
 import { MyApp } from './../../app/app.component';
 import { LoginPage } from './../login/login';
@@ -18,9 +20,20 @@ export class ContactPage {
     public navCtrl: NavController,
     private userService: UserService,
     // private myApp:MyApp,
-    private msg: MsgService
+    private msg: MsgService,
+    private http: HttpService
   ) {
     this.loginUser = this.userService.curUser;
+  }
+
+  ionViewWillEnter(){
+
+  }
+
+  editUserInfo(){
+    this.navCtrl.push(EditUserPage,{
+
+    });
   }
 
   logout() {
